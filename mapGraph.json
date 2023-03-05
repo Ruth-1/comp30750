@@ -1,45 +1,97 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
-  "height": 400,
-  "layer": [
-    {
-      "data": {
-        "url": "data/us-10m.json",
-        "format": {
-          "type": "topojson",
-          "feature": "states"
-        }
+   "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
+   "hconcat":[
+      {
+         "layer":[
+            {
+               "data":{
+                  "url":"data/us-10m.json",
+                  "format":{
+                     "type":"topojson",
+                     "feature":"states"
+                  }
+               },
+               "projection":{
+                  "type":"albersUsa"
+               },
+               "mark":{
+                  "type":"geoshape",
+                  "fill":"lightgray",
+                  "stroke":"white"
+               }
+            },
+            {
+               "data":{
+                  "url":"https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
+               },
+               "projection":{
+                  "type":"albersUsa"
+               },
+              "width":500,
+              "height":500,
+              "params":[
+                {
+                    "name":"brush",
+                    "select":{
+                      "type":"interval",
+                      "on": "mouseover"
+                    }
+                }],
+               "mark":"circle",
+               "encoding":{
+                  "longitude":{
+                     "field":"xlong",
+                     "type":"quantitative"
+                  },
+                  "latitude":{
+                     "field":"ylat",
+                     "type":"quantitative"
+                  },
+                  "size":{
+                     "value":10
+                  },
+                  "color":{
+                     "value":"steelblue"
+                  },
+                  "tooltip":{
+                     "field":"p_name",
+                     "type":"nominal"
+                  },
+                  "opacity":{
+                    "condition": {
+                    "param": "brush",
+                    "value": 0.7
+                   },
+                     "value":0.5
+                  }
+               }
+            }
+         ]
       },
-      "projection": {
-        "type": "albersUsa"
-      },
-      "mark": {
-        "type": "geoshape",
-        "fill": "lightgray",
-        "stroke": "white"
+      {
+        "data":{
+                  "url":"https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
+          },
+         "width":300,
+         "height":300,
+         "mark":"bar",
+         "transform":[
+            {
+               "filter":{
+                  "param":"brush"
+               }
+            }
+         ],
+         "encoding":{
+            "y":{
+               "field":"p_tnum",
+               "type":"quantitative"
+            },
+            "x":{
+               "field":"t_state",
+               "type":"nominal"
+            }
+         }
       }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-06/us_wind.csv"
-      },
-      "projection": {
-        "type": "albersUsa"
-      },
-      "mark": "circle",
-      "encoding": {
-        "longitude": {
-          "field": "xlong",
-          "type": "quantitative"
-        },
-        "latitude": {
-          "field": "ylat",
-          "type": "quantitative"
-        },
-        "size": {"value": 10},
-        "color": {"value": "steelblue"}
-      }
-    }
-  ]
+   ]
 }
