@@ -5,8 +5,8 @@
             "data": {
                 "url": "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-27/baltimore_bridges.csv"
             },
-            "width": 100,
-            "height": 400,
+            "width": 500,
+            "height": 500,
             "mark": "bar",
             "params": [
                 {
@@ -26,14 +26,16 @@
             ],
             "encoding": {
                 "x": {
-                    "field": "p_tnum",
-                    "type": "quantitative",
-                    "scale": {
-                        "type": "log"
-                    }
+                    "field": "vehicles",
+                    "aggregate":"count",
+                    "title": "Number of Vehicles",
+                     // "scale":{  
+                     //       "domain": [0,950]
+                     //       }
+                    
                 },
                 "y": {
-                    "field": "t_state",
+                    "field": "county",
                     "type": "nominal",
                     "sort": "-x"
                 },
@@ -55,7 +57,7 @@
         },
         {
             "width": 500,
-            "height": 400,
+            "height": 500,
             "layer": [
                 {
                     "data": {
