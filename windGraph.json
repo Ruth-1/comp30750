@@ -5,6 +5,8 @@
               },
   "hconcat": [
     {
+      "vconcat": [
+      {
       "width": 100,
       "height": 400,
       "mark": "bar",
@@ -51,6 +53,41 @@
           "value": "lightgrey"
         }
       }
+    },
+    {
+      "mark": "bar",
+      "width": 100,
+      "height": 400,
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "Manufacturers"
+            }
+          ],
+          "groupby": ["t_manu"]
+        },
+        {
+          "filter": "datum.Manufacturers > 3"
+        }
+      ],
+      "encoding": {
+        "x":{
+          "field": "Manufacturers",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear"
+          }
+        },
+        "y":{
+          "field": "t_manu",
+          "type": "ordinal",
+          "sort": "-x"
+        }
+      }
+    }
+    ]
     },
     {
       "vconcat": [
