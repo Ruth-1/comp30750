@@ -1,10 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+                "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
+              },
   "hconcat": [
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
-      },
       "width": 100,
       "height": 400,
       "mark": "bar",
@@ -53,70 +53,129 @@
       }
     },
     {
-      "width": 500,
-      "height": 400,
-      "layer": [
+      "vconcat": [
         {
-          "data": {
-            "url": "data/us-10m.json",
-            "format": {
-              "type": "topojson",
-              "feature": "states"
-            }
-          },
-          "projection": {
-            "type": "albersUsa"
-          },
-          "mark": {
-            "type": "geoshape",
-            "fill": "lightgray",
-            "stroke": "white"
-          }
-        },
-        {
-          "data": {
-            "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
-          },
-          "mark": "circle",
-          "params": [
+          "width": 500,
+          "height": 400,
+          "layer": [
             {
-              "name": "drag",
-              "select": {
-                "type": "interval"
+              "data": {
+                "url": "data/us-10m.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "states"
+                }
+              },
+              "projection": {
+                "type": "albersUsa"
+              },
+              "mark": {
+                "type": "geoshape",
+                "fill": "lightgray",
+                "stroke": "white"
+              }
+            },
+            {
+              "mark": "circle",
+              "transform": [
+                {
+                  "filter": {
+                    "param": "bar_click"
+                  }
+                }
+              ],
+              "encoding": {
+                "longitude": {
+                  "field": "xlong",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "ylat",
+                  "type": "quantitative"
+                },
+                "size": {
+                  "value": 10
+                },
+                "tooltip": {
+                  "field": "p_name",
+                  "type": "nominal"
+                },
+                "color": {
+                  "condition": {
+                    "param": "drag",
+                    "field": "t_state",
+                    "type": "nominal",
+                    "scale": {
+                      "range": [
+                        "olive"
+                      ]
+                    }
+                  },
+                  "value": "lightgrey"
+                }
               }
             }
-          ],
+          ]
+        },
+        {
+          "mark": {
+            "type": "circle"
+          },
+          "height": 400,
+          "width": 400,
+          "params": [
+                {
+                  "name": "drag",
+                  "select": {
+                    "type": "interval"
+                  }
+                }
+              ],
           "transform": [
-            {
-              "filter": {"param": "bar_click"}
-            }
-          ],
+                {
+                  "filter": {
+                    "param": "bar_click"
+                  }
+                }
+              ],
           "encoding": {
-            "longitude": {
-              "field": "xlong",
-              "type": "quantitative"
+            "y": {
+              "axis": {
+                "title": "Year Operational",
+                "gridOpacity": 0.25,
+                "titleFontSize": 17
+              },
+              "field": "p_year",
+              "type": "quantitative",
+              "scale": {
+                "domain": [1980, 2020]
+              }
             },
-            "latitude": {
-              "field": "ylat",
+            "x": {
+              "axis": {
+              "gridOpacity": 0.25,
+              "title": "Height of Turbine",
+              "titleFontSize": 17
+              },
+              "field": "t_ttlh",
               "type": "quantitative"
-            },
-            "size": {
-              "value": 10
             },
             "tooltip": {
               "field": "p_name",
               "type": "nominal"
             },
             "color": {
-              "condition": {
-                "param": "drag",
-                "field": "t_state",
-                "type": "nominal",
-                "scale": {
-                  "range": ["olive"]
-                }
-              },
-              "value": "lightgrey"
+                  "condition": {
+                    "param": "drag",
+                    "field": "t_state",
+                    "type": "nominal",
+                    "scale": {
+                      "range": [
+                        "olive"
+                      ]
+                    }
+                  },
+                  "value": "lightgrey"
             }
           }
         }
