@@ -1,97 +1,120 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-                "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
-              },
-  "hconcat": [
+    "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
+  },
+  "vconcat": [
     {
-      "vconcat": [
-      {
-      "width": 100,
-      "height": 400,
-      "mark": "bar",
-      "params": [
-        {
-          "name": "bar_click",
-          "select": {
-            "type": "point",
-            "encodings": [
-              "color"
-            ]
-          }
-        }
-      ],
-      "transform": [
-        {
-          "filter": "drag"
-        }
-      ],
-      "encoding": {
-        "x": {
-          "field": "p_tnum",
-          "type": "quantitative",
-          "scale": {
-            "type": "log"
-          }
-        },
-        "y": {
-          "field": "t_state",
-          "type": "nominal"
-        },
-        "color": {
-          "condition": {
-            "param": "bar_click",
-            "field": "t_state",
-            "type": "nominal",
-            "scale": {
-              "range": [
-                "olive"
-              ]
-            },
-            "legend": null
-          },
-          "value": "lightgrey"
-        }
-      }
-    },
-    {
-      "mark": "bar",
-      "width": 100,
-      "height": 400,
-      "transform": [
-        {
-          "aggregate": [
+      "hconcat": [
+        { //green bar chart
+          "width": 400,
+          "height": 400,
+          "mark": "bar",
+          "params": [
             {
-              "op": "count",
-              "as": "Manufacturers"
+              "name": "bar_click",
+              "select": {
+                "type": "point",
+                "encodings": [
+                  "color"
+                ]
+              }
             }
           ],
-          "groupby": ["t_manu"]
-        },
-        {
-          "filter": "datum.Manufacturers > 3"
-        }
-      ],
-      "encoding": {
-        "x":{
-          "field": "Manufacturers",
-          "type": "quantitative",
-          "scale": {
-            "type": "linear"
+          "transform": [
+            {
+              "filter": "drag"
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "p_tnum",
+              "type": "quantitative",
+              "scale": {
+                "type": "log"
+              },
+              "axis": {
+                "grid": false
+              }
+            },
+            "y": {
+              "field": "t_state",
+              "type": "nominal"
+            },
+            "color": {
+              "condition": {
+                "param": "bar_click",
+                "field": "t_state",
+                "type": "nominal",
+                // "scale": {
+                //   "range": [
+                //     "olive"
+                //   ]
+                // },
+                "legend": null
+              },
+              "value": "lightgrey"
+            }
           }
         },
-        "y":{
-          "field": "t_manu",
-          "type": "ordinal",
-          "sort": "-x"
+        { //blue bar chart
+          "mark": "bar",
+          "width": 100,
+          "height": 400,
+          "params": [
+            {
+              "name": "bar_click2",
+              "select": {
+                "type": "point",
+                "encodings": [
+                  "color"
+                ]
+              }
+            }
+          ],
+          "transform": [
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "Manufacturers"
+                }
+              ],
+              "groupby": [
+                "t_manu"
+              ]
+            },
+            {
+              "filter": "datum.Manufacturers > 3"
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "Manufacturers",
+              "type": "quantitative",
+              "scale": {
+                "type": "linear"
+              }
+            },
+            "y": {
+              "field": "t_manu",
+              "type": "nominal",
+              "sort": "-x"
+            },
+            "color": {
+              "condition": {
+                "field": "t_manu",
+                "param": "bar_click2"
+              },
+              "value": "lightgrey"
+            }
+          }
         }
-      }
-    }
-    ]
+      ]
     },
     {
-      "vconcat": [
-        {
+      "hconcat": [
+        { //map
           "width": 500,
           "height": 400,
           "layer": [
@@ -112,12 +135,17 @@
                 "stroke": "white"
               }
             },
-            {
+            { //dots on map
               "mark": "circle",
               "transform": [
                 {
                   "filter": {
                     "param": "bar_click"
+                  }
+                },
+                {
+                  "filter": {
+                    "param": "bar_click2"
                   }
                 }
               ],
@@ -154,27 +182,32 @@
             }
           ]
         },
-        {
+        { //scatter plot
           "mark": {
             "type": "circle"
           },
           "height": 400,
           "width": 400,
           "params": [
-                {
-                  "name": "drag",
-                  "select": {
-                    "type": "interval"
-                  }
-                }
-              ],
+            {
+              "name": "drag",
+              "select": {
+                "type": "interval"
+              }
+            }
+          ],
           "transform": [
-                {
-                  "filter": {
-                    "param": "bar_click"
-                  }
-                }
-              ],
+            {
+              "filter": {
+                "param": "bar_click"
+              }
+            },
+            {
+              "filter": {
+                "param": "bar_click2"
+              }
+            }
+          ],
           "encoding": {
             "y": {
               "axis": {
@@ -185,14 +218,17 @@
               "field": "p_year",
               "type": "quantitative",
               "scale": {
-                "domain": [1980, 2020]
+                "domain": [
+                  1980,
+                  2020
+                ]
               }
             },
             "x": {
               "axis": {
-              "gridOpacity": 0.25,
-              "title": "Height of Turbine",
-              "titleFontSize": 17
+                "gridOpacity": 0.25,
+                "title": "Height of Turbine",
+                "titleFontSize": 17
               },
               "field": "t_ttlh",
               "type": "quantitative"
@@ -202,17 +238,17 @@
               "type": "nominal"
             },
             "color": {
-                  "condition": {
-                    "param": "drag",
-                    "field": "t_state",
-                    "type": "nominal",
-                    "scale": {
-                      "range": [
-                        "olive"
-                      ]
-                    }
-                  },
-                  "value": "lightgrey"
+              "condition": {
+                "param": "drag",
+                "field": "t_state",
+                "type": "nominal",
+                "scale": {
+                  "range": [
+                    "olive"
+                  ]
+                }
+              },
+              "value": "lightgrey"
             }
           }
         }
