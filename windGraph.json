@@ -36,6 +36,11 @@
         },
         { //dots on map
           "mark": "circle",
+            "params": [{
+              "name": "t_manu",
+              "select": {"type": "point", "fields": ["nominal"]},
+              "bind": "legend"
+            }],
           "transform": [
             {
               "filter": {
@@ -100,7 +105,7 @@
           ],
           "transform": [
             {
-              "filter": "drag"
+              "filter": {"param": "drag"}
             }
           ],
           "encoding": {
