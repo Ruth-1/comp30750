@@ -6,6 +6,14 @@
   "config": {
     "legend": {"orient": "top-left"}
   },
+  "title": {
+    "text": "US Wind Turbine Data",
+    "anchor": "middle",
+    "fontSize": 30,
+    "align": "center",
+    "fontWeight": "bolder"
+  },
+  
   "vconcat": [
     { //map
       "view": {
@@ -113,7 +121,9 @@
               "scale": {
                 "type": "log"
               },
-              "axis": {
+              "axis":{
+                "title": "Number of Turbines in Project",
+                "titleFontSize": 17,
                 "grid": false
               }
             },
@@ -139,7 +149,7 @@
         },
         { //blue bar chart
           "mark": "bar",
-          "width": 100,
+          "width": 200,
           "height": 400,
           "params": [
             {
@@ -174,12 +184,20 @@
               "type": "quantitative",
               "scale": {
                 "type": "linear"
+              },
+              "axis":{
+                "title": "Number of Turbines with Manufacturer",
+                "titleFontSize": 17
               }
             },
             "y": {
               "field": "t_manu",
               "type": "nominal",
-              "sort": "-x"
+              "sort": "-x",
+               "axis":{
+                "title": "Manufacturer",
+                "titleFontSize": 17
+              }
             },
             "color": {
               "condition": {
