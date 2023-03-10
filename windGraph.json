@@ -3,7 +3,84 @@
   "data": {
     "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
   },
+  "config": {
+    "concat": {
+      "spacing": 50,
+      "columns": 5
+    }
+  },
   "vconcat": [
+    { //map
+      "view": {
+        "cornerRadius": 100
+      },
+      "width": 1200,
+      "height": 400,
+      "layer": [
+        {
+          "data": {
+            "url": "data/us-10m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "states"
+            }
+          },
+          "projection": {
+            "type": "albersUsa"
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "lightgray",
+            "stroke": "white"
+          }
+        },
+        { //dots on map
+          "mark": "circle",
+          "transform": [
+            {
+              "filter": {
+                "param": "bar_click"
+              }
+            },
+            {
+              "filter": {
+                "param": "bar_click2"
+              }
+            }
+          ],
+          "encoding": {
+            "longitude": {
+              "field": "xlong",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "ylat",
+              "type": "quantitative"
+            },
+            "size": {
+              "value": 10
+            },
+            "tooltip": {
+              "field": "p_name",
+              "type": "nominal"
+            },
+            "color": {
+              "condition": {
+                "param": "drag",
+                "field": "t_state",
+                "type": "nominal",
+                "scale": {
+                  "range": [
+                    "olive"
+                  ]
+                }
+              },
+              "value": "lightgrey"
+            }
+          }
+        }
+      ]
+    },
     {
       "hconcat": [
         { //green bar chart
@@ -109,78 +186,6 @@
               "value": "lightgrey"
             }
           }
-        }
-      ]
-    },
-    {
-      "hconcat": [
-        { //map
-          "width": 500,
-          "height": 400,
-          "layer": [
-            {
-              "data": {
-                "url": "data/us-10m.json",
-                "format": {
-                  "type": "topojson",
-                  "feature": "states"
-                }
-              },
-              "projection": {
-                "type": "albersUsa"
-              },
-              "mark": {
-                "type": "geoshape",
-                "fill": "lightgray",
-                "stroke": "white"
-              }
-            },
-            { //dots on map
-              "mark": "circle",
-              "transform": [
-                {
-                  "filter": {
-                    "param": "bar_click"
-                  }
-                },
-                {
-                  "filter": {
-                    "param": "bar_click2"
-                  }
-                }
-              ],
-              "encoding": {
-                "longitude": {
-                  "field": "xlong",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "ylat",
-                  "type": "quantitative"
-                },
-                "size": {
-                  "value": 10
-                },
-                "tooltip": {
-                  "field": "p_name",
-                  "type": "nominal"
-                },
-                "color": {
-                  "condition": {
-                    "param": "drag",
-                    "field": "t_state",
-                    "type": "nominal",
-                    "scale": {
-                      "range": [
-                        "olive"
-                      ]
-                    }
-                  },
-                  "value": "lightgrey"
-                }
-              }
-            }
-          ]
         },
         { //scatter plot
           "mark": {
