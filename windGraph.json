@@ -6,118 +6,21 @@
   "title": {
     "text": "US Wind Turbine Data",
     "anchor": "middle",
-    "fontSize": 30,
+    "fontSize": 20,
     "align": "center",
     "fontWeight": "bolder"
   },
+  "transform": [
+    {
+      "filter": "datum.t_cap > 0"
+    }
+  ],
   "vconcat": [
-    { //map
-      "view": {
-        "cornerRadius": 100
-      },
-      "width": 1700,
-      "height": 500,
-      "layer": [
-        {
-          "data": {
-            "url": "data/us-10m.json",
-            "format": {
-              "type": "topojson",
-              "feature": "states"
-            }
-          },
-          "projection": {
-            "type": "albersUsa"
-          },
-          "mark": {
-            "type": "geoshape",
-            "fill": "lightgray",
-            "stroke": "white"
-          }
-        },
-        { //dots on map
-          "mark": "circle",
-          "params": [
-            {
-              "name": "lgs",
-              "select": {
-                "type": "point",
-                "fields": [
-                  "t_manu"
-                ]
-              },
-              "bind": "legend"
-            }
-          ],
-          "transform": [
-            {
-              "filter": {
-                "param": "bar_click"
-              }
-            },
-            {
-              "filter": {
-                "param": "bar_click2"
-              }
-            },
-            {
-              "filter": {
-                "param": "drag"
-              }
-            }
-          ],
-          "encoding": {
-            "longitude": {
-              "field": "xlong",
-              "type": "quantitative"
-            },
-            "latitude": {
-              "field": "ylat",
-              "type": "quantitative"
-            },
-            "size": {
-              "field": "t_manu",
-              "type": "nominal",
-              "scale": {
-                "range": [
-                  80,
-                  80
-                ]
-              },
-              "legend": {
-                "title":"Manufacturer",
-                "titleFontSize": 20,
-                "labelFontSize": 10,
-                "orient": "top-right",
-                "padding":-40,
-                "symbolSize": 8
-              }
-            },
-            "tooltip": {
-              "field": "p_name",
-              "type": "nominal"
-            },
-            "color": {
-              "value": "blue",
-               "legend": null
-            },
-            "opacity": {
-              "condition": {
-                "param": "lgs",
-                "value": 1,
-                "legend": null
-              },
-              "value": 0
-            }
-          }
-        }
-      ]
-    },
     {
       "hconcat": [
-        { //green bar chart
-          "width": 300,
-          "height": 600,
+        {
+          "width": 80,
+          "height": 350,
           "mark": "bar",
           "params": [
             {
@@ -139,14 +42,11 @@
               "field": "p_tnum",
               "type": "quantitative",
               "scale": {
-                "type": "log",
-                "domain":[
-                  1,10000
-                ]
+                "type": "log"
               },
               "axis": {
                 "title": "Number of Turbines in Project",
-                "titleFontSize": 17,
+                "titleFontSize": 12,
                 "grid": false,
                 "labelFontSize": 12,
                 "labelPadding": 12,
@@ -159,12 +59,13 @@
               "axis": {
                 "title": "States",
                 "gridOpacity": 0.25,
-                "titleFontSize": 17,
-                "labelFontSize": 12,
-                "labelPadding": 12,
+                "titleFontSize": 12,
+                "labelFontSize": 10,
+                "labelPadding": 10,
                 "grid": true,
                 "labelFontWeight": "bold"
-              }
+              },
+              "sort": null
             },
             "color": {
               "condition": {
@@ -177,82 +78,124 @@
             }
           }
         },
-        { //blue bar chart
-          "mark": "bar",
-          "width": 400,
-          "height": 800,
-          "transform": [
+        {
+          "width": 500,
+          "height": 350,
+          "layer": [
             {
-              "filter": "datum.t_model != 'missing'"
-            },
-              {
-              "filter": {
-                "param": "drag"
+              "data": {
+                "url": "data/us-10m.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "states"
+                }
+              },
+              "projection": {
+                "type": "albersUsa"
+              },
+              "mark": {
+                "type": "geoshape",
+                "fill": "lightgray",
+                "stroke": "white"
               }
-            }
-          ],
-          "params": [
+            },
             {
-              "name": "bar_click2",
-              "select": {
-                "type": "point"
+              "mark": "circle",
+              "params": [
+                {
+                  "name": "lgs",
+                  "select": {
+                    "type": "point",
+                    "fields": [
+                      "t_manu"
+                    ]
+                  },
+                  "bind": "legend"
+                }
+              ],
+              "transform": [
+                {
+                  "filter": {
+                    "param": "bar_click"
+                  }
+                },
+                {
+                  "filter": {
+                    "param": "tick_drag"
+                  }
+                },
+                {
+                  "filter": {
+                    "param": "drag"
+                  }
+                }
+              ],
+              "encoding": {
+                "longitude": {
+                  "field": "xlong",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "ylat",
+                  "type": "quantitative"
+                },
+                "size": {
+                  "field": "t_manu",
+                  "type": "nominal",
+                  "legend": null,
+                  "scale": {
+                    "range": [
+                      80,
+                      80
+                    ]
+                  }
+                },
+                "tooltip": {
+                  "field": "p_name",
+                  "type": "nominal"
+                },
+                "color": {
+                  "value": "blue",
+                  "legend": null
+                },
+                "opacity": {
+                  "condition": {
+                    "param": "lgs",
+                    "value": 1,
+                    "legend": null
+                  },
+                  "value": 0
+                }
               }
             }
-          ],
-          "encoding": {
-            "y": {
-              "field": "t_model",
-              "type": "nominal",
-              "axis": {
-                "title": "Turbine",
-                "titleFontSize": 17,
-                "labelFontSize": 12,
-                "labelPadding": 12,
-                "labelFontWeight": "bold"
-              }
-            },
-            "x": {
-              "field": "t_cap",
-              "type": "quantitative",
-              "axis": {
-                "title": "Turbine Capacity (kW)",
-                "titleFontSize": 17,
-                "grid": false,
-                "labelFontSize": 12,
-                "labelPadding": 12,
-                "labelFontWeight": "bold"
-              },
-              "scale": {
-                "type": "log",
-                  "domain":[
-                  1,10000
-                ]
-              }
-            },
-            "color": {
-              "condition": {
-                // "field": "t_manu",
-                "param": "bar_click2",
-                "value": "green",
-                "legend": null
-              
-              },
-              "value": "lightgrey"
-            }
-          }
-        },
-        { //scatter plot
+          ]
+        }
+      ]
+    },
+    {
+      "hconcat": [
+        {
           "mark": {
             "type": "circle"
           },
-          "height": 600,
-          "width": 600,
+          "height": 300,
+          "width": 500,
           "params": [
             {
               "name": "drag",
               "select": {
                 "type": "interval"
               }
+            },
+            {
+              "name": "legend_click",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "Range"
+                ]
+              },
+              "bind": "legend"
             }
           ],
           "transform": [
@@ -263,10 +206,10 @@
             },
             {
               "filter": {
-                "param": "bar_click2"
+                "param": "tick_drag"
               }
             },
-             {
+            {
               "filter": "datum.t_ttlh > 0 "
             }
           ],
@@ -275,10 +218,10 @@
               "axis": {
                 "title": "Year Operational",
                 "gridOpacity": 0.25,
-                "titleFontSize": 17,
+                "titleFontSize": 12,
                 "format": "d",
-                "labelFontSize": 12,
-                "labelPadding": 12,
+                "labelFontSize": 10,
+                "labelPadding": 10,
                 "grid": true,
                 "labelFontWeight": "bold"
               },
@@ -294,19 +237,19 @@
             "x": {
               "axis": {
                 "gridOpacity": 0.25,
-                "title": "Height of Turbine",
-                "titleFontSize": 15,
-                "labelFontSize": 12,
-                "labelPadding": 12,
+                "title": "Height of Turbine (Metres)",
+                "titleFontSize": 12,
+                "labelFontSize": 10,
+                "labelPadding": 10,
                 "grid": true,
                 "labelFontWeight": "bold"
               },
               "field": "t_ttlh",
               "type": "quantitative",
-                "scale": {
+              "scale": {
                 "domain": [
                   0,
-                  160
+                  200
                 ]
               }
             },
@@ -317,9 +260,10 @@
             "color": {
               "condition": {
                 "param": "drag",
-                "field": "t_state",
-                "type": "nominal",
-                "legend": null,
+                "field": "Range",
+                "legend": {
+                  "title": "Capacity (KW)"
+                },
                 "scale": {
                   "range": [
                     "red"
@@ -329,19 +273,77 @@
               "value": "lightgrey"
             },
             "size": {
-              "field": "p_cap",
-              "type": "quantitative",
+              "field": "Range",
+              "sort": [
+                "< 1000",
+                "1000 - 2000",
+                "2000 - 3000",
+                "≥ 3000"
+              ],
               "scale": {
+                "domain": [
+                  "< 1000",
+                  "1000 - 2000",
+                  "2000 - 3000",
+                  "≥ 3000"
+                ],
                 "range": [
-                  30,
-                  300
+                  350,
+                  10
                 ]
               }
             },
-            "opacity":{
-              "value": 0.4
+            "opacity": {
+              "condition": {
+                "param": "legend_click",
+                "value": 0.4
+              },
+              "value": 0
             }
-            
+          }
+        },
+        {
+          "width": 500,
+          "height": 50,
+          "mark": "tick",
+          "orient": "vertical",
+          "transform": [
+            {
+              "filter": "datum.t_model != 'missing'"
+            },
+            {
+              "filter": {
+                "param": "drag"
+              }
+            }
+          ],
+          "params": [
+            {
+              "name": "tick_drag",
+              "select": {
+                "type": "interval"
+              }
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "t_cap",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  1,
+                  6200
+                ],
+                "type": "linear"
+              },
+              "axis": {
+                "title": "Capacity"
+              }
+            },
+            "tooltip": {
+              "field": "t_model",
+              "type": "nominal"
+            }
           }
         }
       ]
