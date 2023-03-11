@@ -88,6 +88,7 @@
                 "titleFontSize": 20,
                 "labelFontSize": 10,
                 "orient": "top-right",
+                "padding":-40,
                 "symbolSize": 8
               }
             },
@@ -96,12 +97,14 @@
               "type": "nominal"
             },
             "color": {
-              "value": "blue"
+              "value": "blue",
+               "legend": null
             },
             "opacity": {
               "condition": {
                 "param": "lgs",
-                "value": 1
+                "value": 1,
+                "legend": null
               },
               "value": 0
             }
@@ -155,7 +158,7 @@
             "color": {
               "condition": {
                 "param": "bar_click",
-                "field": "t_state",
+                "value": "orange",
                 "type": "nominal",
                 "legend": null
               },
@@ -202,8 +205,11 @@
             },
             "color": {
               "condition": {
-                "field": "t_manu",
-                "param": "bar_click2"
+                // "field": "t_manu",
+                "param": "bar_click2",
+                "value": "green",
+                "legend": null
+              
               },
               "value": "lightgrey"
             }
@@ -272,6 +278,7 @@
                 "param": "drag",
                 "field": "t_state",
                 "type": "nominal",
+                "legend": null,
                 "scale": {
                   "range": [
                     "red"
