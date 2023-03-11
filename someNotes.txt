@@ -1,2 +1,19 @@
 make a field size /symbols based on the field we want as legend
 then create our legend that uses that field
+
+ "transform":[
+            {
+              "aggregate": [
+                {
+                  "op": "count",
+                  "as": "Manufacturers"
+                }
+              ],
+              "groupby": [
+                "t_manu"
+              ]
+            },
+            {
+              "filter": "datum.Manufacturers > 3"
+            }
+          ],

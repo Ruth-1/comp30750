@@ -10,7 +10,7 @@
     "align": "center",
     "fontWeight": "bolder"
   },
-  "transform": [],
+  
   "vconcat": [
     { //map
       "view": {
@@ -38,18 +38,11 @@
         },
         { //dots on map
           "mark": "circle",
-          "params": [
-            {
+            "params": [{
               "name": "lgs",
-              "select": {
-                "type": "point",
-                "fields": [
-                  "t_manu"
-                ]
-              },
+              "select": {"type": "point", "fields": ["t_manu"]},
               "bind": "legend"
-            }
-          ],
+            }],
           "transform": [
             {
               "filter": {
@@ -61,7 +54,7 @@
                 "param": "bar_click2"
               }
             },
-            {
+             {
               "filter": {
                 "param": "drag"
               }
@@ -79,17 +72,17 @@
             "size": {
               "field": "t_manu",
               "type": "nominal",
+              
               "scale": {
                 "range": [
                   80,
                   80
-                ]
-              },
+                ]},
               "legend": {
                 "titleFontSize": 20,
                 "labelFontSize": 10,
-                "orient": "top-left",
-                "symbolSize": 8
+                "orient": "top-right",
+                "symbolSize":8
               }
             },
             "tooltip": {
@@ -97,15 +90,17 @@
               "type": "nominal"
             },
             "color": {
-              "value": "olive"
+              "value":"blue"
             },
-            "opacity": {
+            "opacity":{
               "condition": {
                 "param": "lgs",
                 "value": 1
               },
-              "value": 0
+              "value":0
             }
+            
+
           }
         }
       ]
@@ -120,18 +115,13 @@
             {
               "name": "bar_click",
               "select": {
-                "type": "point",
-                "encodings": [
-                  "color"
-                ]
+                "type": "point"
               }
             }
           ],
           "transform": [
             {
-              "filter": {
-                "param": "drag"
-              }
+              "filter": {"param": "drag"}
             }
           ],
           "encoding": {
@@ -141,7 +131,7 @@
               "scale": {
                 "type": "log"
               },
-              "axis": {
+              "axis":{
                 "title": "Number of Turbines in Project",
                 "titleFontSize": 17,
                 "grid": false
@@ -151,16 +141,17 @@
               "field": "t_state",
               "type": "nominal",
               "axis": {
-                "title": "States",
-                "gridOpacity": 0.25,
-                "titleFontSize": 17
-              }
+                  "title":"States",
+                  "gridOpacity": 0.25,
+                  "titleFontSize": 17
+                }
             },
             "color": {
               "condition": {
                 "param": "bar_click",
                 "field": "t_state",
                 "type": "nominal",
+                "legend":null
               },
               "value": "lightgrey"
             }
@@ -168,54 +159,42 @@
         },
         { //blue bar chart
           "mark": "bar",
-          "width": 200,
-          "height": 400,
+          "width": 300,
+          "height": 650,
+          "transform":[
+            {
+              "filter": "datum.t_model != 'missing'"
+            }
+          ],
           "params": [
             {
               "name": "bar_click2",
               "select": {
-                "type": "point",
-                "encodings": [
-                  "color"
-                ]
+                "type": "point"
               }
             }
           ],
-          "transform": [
-            {
-              "aggregate": [
-                {
-                  "op": "count",
-                  "as": "Manufacturers"
-                }
-              ],
-              "groupby": [
-                "t_manu"
-              ]
-            },
-            {
-              "filter": "datum.Manufacturers > 3"
-            }
-          ],
+
+         
           "encoding": {
-            "x": {
-              "field": "Manufacturers",
-              "type": "quantitative",
-              "scale": {
-                "type": "linear"
-              },
-              "axis": {
-                "title": "Number of Turbines with Manufacturer",
-                "titleFontSize": 17
-              }
-            },
             "y": {
-              "field": "t_manu",
+              "field": "t_model",
               "type": "nominal",
-              "sort": "-x",
-              "axis": {
-                "title": "Manufacturer",
+              "axis":{
+                "title": "Turbine",
                 "titleFontSize": 17
+              },
+             
+            },
+            "x": {
+              "field": "t_cap",
+              "type": "quantitative",
+               "axis":{
+                "title": "Turbine Capacity (kW)",
+                "titleFontSize": 17
+              },
+               "scale":{
+                "type": "log"
               }
             },
             "color": {
@@ -289,7 +268,7 @@
                 "type": "nominal",
                 "scale": {
                   "range": [
-                    "olive"
+                    "red"
                   ]
                 }
               },
