@@ -139,12 +139,18 @@
               "field": "p_tnum",
               "type": "quantitative",
               "scale": {
-                "type": "log"
+                "type": "log",
+                "domain":[
+                  1,10000
+                ]
               },
               "axis": {
                 "title": "Number of Turbines in Project",
                 "titleFontSize": 17,
-                "grid": false
+                "grid": false,
+                "labelFontSize": 12,
+                "labelPadding": 12,
+                "labelFontWeight": "bold"
               }
             },
             "y": {
@@ -153,7 +159,11 @@
               "axis": {
                 "title": "States",
                 "gridOpacity": 0.25,
-                "titleFontSize": 17
+                "titleFontSize": 17,
+                "labelFontSize": 12,
+                "labelPadding": 12,
+                "grid": true,
+                "labelFontWeight": "bold"
               }
             },
             "color": {
@@ -195,7 +205,10 @@
               "type": "nominal",
               "axis": {
                 "title": "Turbine",
-                "titleFontSize": 17
+                "titleFontSize": 17,
+                "labelFontSize": 12,
+                "labelPadding": 12,
+                "labelFontWeight": "bold"
               }
             },
             "x": {
@@ -204,10 +217,16 @@
               "axis": {
                 "title": "Turbine Capacity (kW)",
                 "titleFontSize": 17,
-                "grid": false
+                "grid": false,
+                "labelFontSize": 12,
+                "labelPadding": 12,
+                "labelFontWeight": "bold"
               },
               "scale": {
-                "type": "log"
+                "type": "log",
+                  "domain":[
+                  1,10000
+                ]
               }
             },
             "color": {
@@ -248,7 +267,7 @@
               }
             },
              {
-              "filter": "datum.p_cap > 0 "
+              "filter": "datum.t_ttlh > 0 "
             }
           ],
           "encoding": {
@@ -257,7 +276,11 @@
                 "title": "Year Operational",
                 "gridOpacity": 0.25,
                 "titleFontSize": 17,
-                 "format": "d"
+                "format": "d",
+                "labelFontSize": 12,
+                "labelPadding": 12,
+                "grid": true,
+                "labelFontWeight": "bold"
               },
               "field": "p_year",
               "type": "quantitative",
@@ -272,10 +295,20 @@
               "axis": {
                 "gridOpacity": 0.25,
                 "title": "Height of Turbine",
-                "titleFontSize": 17
+                "titleFontSize": 15,
+                "labelFontSize": 12,
+                "labelPadding": 12,
+                "grid": true,
+                "labelFontWeight": "bold"
               },
               "field": "t_ttlh",
-              "type": "quantitative"
+              "type": "quantitative",
+                "scale": {
+                "domain": [
+                  0,
+                  160
+                ]
+              }
             },
             "tooltip": {
               "field": "p_name",
