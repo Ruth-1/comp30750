@@ -26,7 +26,7 @@
             {
               "name": "bar_click",
               "select": {
-                "type": "point"
+                "type": "interval"
               }
             }
           ],
@@ -37,6 +37,11 @@
               }
             },
             {
+              "filter": {
+                "param": "dot_click"
+              }
+            },
+            {
               "filter":{
                 "param": "legend_click"
               }
@@ -44,23 +49,24 @@
           ],
           "encoding": {
             "x": {
+
               "field": "p_tnum",
               "type": "quantitative",
               "scale": {
-                "type": "log"
+                "type": "linear"
               },
               "axis": {
                 "title": "Number of Turbines in Project",
                 "titleFontSize": 12,
                 "grid": false,
-                "labelFontSize": 12,
-                "labelPadding": 12,
+                "labelFontSize": 10,
+                "labelPadding": 10,
                 "labelFontWeight": "bold"
               }
+
             },
             "y": {
               "field": "t_state",
-              "type": "nominal",
               "axis": {
                 "title": "States",
                 "gridOpacity": 0.25,
@@ -70,14 +76,13 @@
                 "grid": true,
                 "labelFontWeight": "bold"
               },
-              "sort": null
+              "sort": "-x"
             },
             "color": {
               "condition": {
                 "param": "bar_click",
-                "value": "orange",
-                "type": "nominal",
-                "legend": null
+                "value": "#CD5888"
+
               },
               "value": "lightgrey"
             }
@@ -105,17 +110,16 @@
               }
             },
             {
-              "mark": "circle",
+              "mark": {
+                "type": "circle",
+                "size": 10
+              },
               "params": [
                 {
-                  "name": "lgs",
+                  "name": "dot_click",
                   "select": {
-                    "type": "point",
-                    "fields": [
-                      "t_manu"
-                    ]
-                  },
-                  "bind": "legend"
+                    "type": "point"
+                  }
                 }
               ],
               "transform": [
@@ -155,8 +159,8 @@
                   "legend": null,
                   "scale": {
                     "range": [
-                      80,
-                      80
+                      40,
+                      40
                     ]
                   }
                 },
@@ -165,16 +169,15 @@
                   "type": "nominal"
                 },
                 "color": {
-                  "value": "blue",
+                  "value": "#913175",
                   "legend": null
                 },
-                "opacity": {
+                "opacity":{
                   "condition": {
-                    "param": "lgs",
-                    "value": 1,
-                    "legend": null
+                    "param": "dot_click",
+                    "value": 1
                   },
-                  "value": 0
+                  "value": 0.1
                 }
               }
             }
@@ -217,6 +220,11 @@
             {
               "filter": {
                 "param": "tick_drag"
+              }
+            },
+            {
+              "filter": {
+                "param": "dot_click"
               }
             },
             {
@@ -264,7 +272,7 @@
               }
             },
             "tooltip": {
-              "field": "p_name",
+              "field": "t_manu",
               "type": "nominal"
             },
             "color": {
@@ -282,7 +290,7 @@
                 },
                 "scale": {
                   "range": [
-                    "red"
+                    "#20262E"
                   ]
                 }
               },
@@ -323,6 +331,11 @@
               }
             },
             {
+              "filter": {
+                "param": "dot_click"
+              }
+            },
+            {
               "filter":{
                 "param": "legend_click"
               }
@@ -348,7 +361,7 @@
                 "type": "linear"
               },
               "axis": {
-                "title": "Capacity"
+                "title": "Capacity (kW)"
               }
             },
             "tooltip": {
