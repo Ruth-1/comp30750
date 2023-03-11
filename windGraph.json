@@ -3,9 +3,6 @@
   "data": {
     "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
   },
-  "config": {
-    "legend": {"orient": "top-left"}
-  },
   "title": {
     "text": "US Wind Turbine Data",
     "anchor": "middle",
@@ -13,7 +10,7 @@
     "align": "center",
     "fontWeight": "bolder"
   },
-  
+  "transform": [],
   "vconcat": [
     { //map
       "view": {
@@ -41,11 +38,18 @@
         },
         { //dots on map
           "mark": "circle",
-            "params": [{
+          "params": [
+            {
               "name": "lgs",
-              "select": {"type": "point", "fields": ["t_manu"]},
+              "select": {
+                "type": "point",
+                "fields": [
+                  "t_manu"
+                ]
+              },
               "bind": "legend"
-            }],
+            }
+          ],
           "transform": [
             {
               "filter": {
@@ -55,6 +59,11 @@
             {
               "filter": {
                 "param": "bar_click2"
+              }
+            },
+            {
+              "filter": {
+                "param": "drag"
               }
             }
           ],
@@ -68,26 +77,35 @@
               "type": "quantitative"
             },
             "size": {
-              "value": 10
+              "field": "t_manu",
+              "type": "nominal",
+              "scale": {
+                "range": [
+                  80,
+                  80
+                ]
+              },
+              "legend": {
+                "titleFontSize": 20,
+                "labelFontSize": 10,
+                "orient": "top-left",
+                "symbolSize": 8
+              }
             },
             "tooltip": {
               "field": "p_name",
               "type": "nominal"
             },
             "color": {
+              "value": "olive"
+            },
+            "opacity": {
               "condition": {
-                "param": "drag",
-                "field": "t_state",
-                "type": "nominal",
-                "scale": {
-                  "range": [
-                    "olive"
-                  ]
-                }
+                "param": "lgs",
+                "value": 1
               },
-              "value": "lightgrey"
+              "value": 0
             }
-
           }
         }
       ]
@@ -111,7 +129,9 @@
           ],
           "transform": [
             {
-              "filter": {"param": "drag"}
+              "filter": {
+                "param": "drag"
+              }
             }
           ],
           "encoding": {
@@ -121,7 +141,7 @@
               "scale": {
                 "type": "log"
               },
-              "axis":{
+              "axis": {
                 "title": "Number of Turbines in Project",
                 "titleFontSize": 17,
                 "grid": false
@@ -131,17 +151,16 @@
               "field": "t_state",
               "type": "nominal",
               "axis": {
-                  "title":"States",
-                  "gridOpacity": 0.25,
-                  "titleFontSize": 17
-                }
+                "title": "States",
+                "gridOpacity": 0.25,
+                "titleFontSize": 17
+              }
             },
             "color": {
               "condition": {
                 "param": "bar_click",
                 "field": "t_state",
                 "type": "nominal",
-                "legend": null
               },
               "value": "lightgrey"
             }
@@ -185,7 +204,7 @@
               "scale": {
                 "type": "linear"
               },
-              "axis":{
+              "axis": {
                 "title": "Number of Turbines with Manufacturer",
                 "titleFontSize": 17
               }
@@ -194,7 +213,7 @@
               "field": "t_manu",
               "type": "nominal",
               "sort": "-x",
-               "axis":{
+              "axis": {
                 "title": "Manufacturer",
                 "titleFontSize": 17
               }
