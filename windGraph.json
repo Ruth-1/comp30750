@@ -35,6 +35,11 @@
               "filter": {
                 "param": "drag"
               }
+            },
+            {
+              "filter":{
+                "param": "legend_click"
+              }
             }
           ],
           "encoding": {
@@ -127,6 +132,11 @@
                 {
                   "filter": {
                     "param": "drag"
+                  }
+                },
+                {
+                  "filter":{
+                    "param": "legend_click"
                   }
                 }
               ],
@@ -262,7 +272,13 @@
                 "param": "drag",
                 "field": "Range",
                 "legend": {
-                  "title": "Capacity (KW)"
+                  "title": "Capacity (kW)",
+                  "values": [
+                    "< 1000",
+                  "1000 - 2000",
+                  "2000 - 3000",
+                  "≥ 3000"
+                  ]
                 },
                 "scale": {
                   "range": [
@@ -273,20 +289,8 @@
               "value": "lightgrey"
             },
             "size": {
-              "field": "Range",
-              "sort": [
-                "< 1000",
-                "1000 - 2000",
-                "2000 - 3000",
-                "≥ 3000"
-              ],
+              "field": "t_cap",
               "scale": {
-                "domain": [
-                  "< 1000",
-                  "1000 - 2000",
-                  "2000 - 3000",
-                  "≥ 3000"
-                ],
                 "range": [
                   350,
                   10
@@ -303,10 +307,12 @@
           }
         },
         {
-          "width": 500,
-          "height": 50,
-          "mark": "tick",
-          "orient": "vertical",
+          "width": 50,
+          "height": 300,
+          "mark": {
+            "type": "tick",
+            "orient": "horizontal"
+          },
           "transform": [
             {
               "filter": "datum.t_model != 'missing'"
@@ -314,6 +320,11 @@
             {
               "filter": {
                 "param": "drag"
+              }
+            },
+            {
+              "filter":{
+                "param": "legend_click"
               }
             }
           ],
@@ -326,7 +337,7 @@
             }
           ],
           "encoding": {
-            "x": {
+            "y": {
               "field": "t_cap",
               "type": "quantitative",
               "scale": {
