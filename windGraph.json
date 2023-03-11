@@ -15,8 +15,8 @@
       "view": {
         "cornerRadius": 100
       },
-      "width": 1000,
-      "height": 400,
+      "width": 1700,
+      "height": 500,
       "layer": [
         {
           "data": {
@@ -85,6 +85,7 @@
                 ]
               },
               "legend": {
+                "title":"Manufacturer",
                 "titleFontSize": 20,
                 "labelFontSize": 10,
                 "orient": "top-right",
@@ -116,7 +117,7 @@
       "hconcat": [
         { //green bar chart
           "width": 300,
-          "height": 400,
+          "height": 600,
           "mark": "bar",
           "params": [
             {
@@ -168,8 +169,8 @@
         },
         { //blue bar chart
           "mark": "bar",
-          "width": 300,
-          "height": 650,
+          "width": 400,
+          "height": 800,
           "transform": [
             {
               "filter": "datum.t_model != 'missing'"
@@ -225,8 +226,8 @@
           "mark": {
             "type": "circle"
           },
-          "height": 400,
-          "width": 400,
+          "height": 600,
+          "width": 600,
           "params": [
             {
               "name": "drag",
