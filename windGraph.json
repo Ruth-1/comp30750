@@ -173,6 +173,11 @@
           "transform": [
             {
               "filter": "datum.t_model != 'missing'"
+            },
+              {
+              "filter": {
+                "param": "drag"
+              }
             }
           ],
           "params": [
@@ -190,14 +195,15 @@
               "axis": {
                 "title": "Turbine",
                 "titleFontSize": 17
-              },
+              }
             },
             "x": {
               "field": "t_cap",
               "type": "quantitative",
               "axis": {
                 "title": "Turbine Capacity (kW)",
-                "titleFontSize": 17
+                "titleFontSize": 17,
+                "grid": false
               },
               "scale": {
                 "type": "log"
@@ -249,7 +255,8 @@
               "axis": {
                 "title": "Year Operational",
                 "gridOpacity": 0.25,
-                "titleFontSize": 17
+                "titleFontSize": 17,
+                 "format": "d"
               },
               "field": "p_year",
               "type": "quantitative",
@@ -298,7 +305,7 @@
               }
             },
             "opacity":{
-              "value": 0.3
+              "value": 0.4
             }
             
           }
