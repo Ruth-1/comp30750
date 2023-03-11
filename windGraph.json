@@ -19,7 +19,7 @@
     {
       "hconcat": [
         {
-          "width": 80,
+          "width": 180,
           "height": 350,
           "mark": "bar",
           "params": [
@@ -44,6 +44,11 @@
             {
               "filter":{
                 "param": "legend_click"
+              }
+            },
+            {
+              "filter": {
+                "param": "tick_drag"
               }
             }
           ],
@@ -283,11 +288,12 @@
                   "title": "Capacity (kW)",
                   "values": [
                     "< 1000",
-                  "1000 - 2000",
-                  "2000 - 3000",
-                  "≥ 3000"
+                    "1000 - 2000",
+                    "2000 - 3000",
+                    "≥ 3000"
                   ]
                 },
+
                 "scale": {
                   "range": [
                     "#20262E"
