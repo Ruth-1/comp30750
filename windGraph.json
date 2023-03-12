@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
+    "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st2.csv"
   },
   "title": {
     "text": "US Wind Turbine Data",
@@ -18,7 +18,14 @@
   "vconcat": [
     {
       "hconcat": [
-        {
+      {
+        "title": {
+          "text": "Number of Turbines per State",
+          "anchor": "middle",
+          "fontSize": 16,
+          "align": "center",
+          "fontWeight": "bolder"
+        },
           "width": 180,
           "height": 350,
           "mark": "bar",
@@ -90,6 +97,9 @@
 
               },
               "value": "lightgrey"
+            },
+            "tooltip": {
+              "field": "t_county"
             }
           }
         },
@@ -195,6 +205,13 @@
         {
           "mark": {
             "type": "circle"
+          },
+          "title": {
+            "text": "Year Operation vs Height of Turbine",
+            "anchor": "middle",
+            "fontSize": 16,
+            "align": "center",
+            "fontWeight": "bolder"
           },
           "height": 300,
           "width": 500,
@@ -323,6 +340,13 @@
         {
           "width": 50,
           "height": 300,
+          "title": {
+            "text": "Capacity of Wind Turbines",
+            "anchor": "middle",
+            "fontSize": 16,
+            "align": "center",
+            "fontWeight": "bolder"
+           },
           "mark": {
             "type": "tick",
             "orient": "horizontal"
@@ -334,6 +358,11 @@
             {
               "filter": {
                 "param": "drag"
+              }
+            },
+             {
+              "filter": {
+                "param": "bar_click"
               }
             },
             {
@@ -362,12 +391,16 @@
               "scale": {
                 "domain": [
                   1,
-                  6200
+                  4000
                 ],
                 "type": "linear"
               },
               "axis": {
-                "title": "Capacity (kW)"
+                "title": "Capacity (kW)",
+                "labelFontSize": 10,
+                "labelPadding": 10,
+                "grid": true,
+                "labelFontWeight": "bold"
               }
             },
             "tooltip": {
