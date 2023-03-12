@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st.csv"
+    "url": "https://raw.githubusercontent.com/Ruth-1/comp30750/main/wind_usa_cleaned_st2.csv"
   },
   "title": {
     "text": "US Wind Turbine Data",
@@ -42,7 +42,7 @@
               }
             },
             {
-              "filter":{
+              "filter": {
                 "param": "legend_click"
               }
             },
@@ -54,7 +54,6 @@
           ],
           "encoding": {
             "x": {
-
               "field": "p_tnum",
               "type": "quantitative",
               "scale": {
@@ -68,7 +67,6 @@
                 "labelPadding": 10,
                 "labelFontWeight": "bold"
               }
-
             },
             "y": {
               "field": "t_state",
@@ -87,9 +85,11 @@
               "condition": {
                 "param": "bar_click",
                 "value": "#CD5888"
-
               },
               "value": "lightgrey"
+            },
+            "tooltip": {
+              "field": "t_county"
             }
           }
         },
@@ -144,7 +144,7 @@
                   }
                 },
                 {
-                  "filter":{
+                  "filter": {
                     "param": "legend_click"
                   }
                 }
@@ -177,7 +177,7 @@
                   "value": "#913175",
                   "legend": null
                 },
-                "opacity":{
+                "opacity": {
                   "condition": {
                     "param": "dot_click",
                     "value": 1
@@ -293,7 +293,6 @@
                     "≥ 3000"
                   ]
                 },
-
                 "scale": {
                   "range": [
                     "#20262E"
@@ -338,11 +337,16 @@
             },
             {
               "filter": {
+                "param": "bar_click"
+              }
+            },
+            {
+              "filter": {
                 "param": "dot_click"
               }
             },
             {
-              "filter":{
+              "filter": {
                 "param": "legend_click"
               }
             }
@@ -362,7 +366,7 @@
               "scale": {
                 "domain": [
                   1,
-                  6200
+                  4000
                 ],
                 "type": "linear"
               },
